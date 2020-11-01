@@ -1,0 +1,1205 @@
+{% load static %}
+{% load ratings %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Site Metas -->
+        {% if title %}
+        <title>Django Blog - {{ title }}</title>
+    {% else %}
+        <title>Django Blog</title>
+    {% endif %}
+
+
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Design fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+
+
+
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/animate.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/bootstrap.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/font-awesome.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/marketing.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/responsive.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+
+
+<body>
+
+ <header class="site-header">
+           <!--Navbar-->
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+
+  <!-- Navbar brand -->
+            <a class="navbar-brand mr-4" href="{% url 'blog-home' %}"><p style="font: normal 36px 'Cookie', cursive;margin:0px;">Axon <span style="color:#5383d3;">Blog</span></p></a>
+
+  <!-- Collapse button -->
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+    aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <!-- Collapsible content -->
+  <div class="collapse navbar-collapse" id="basicExampleNav">
+
+    <!-- Links -->
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+         <a class="nav-item nav-link" href="{% url 'blog-home' %}"><i class="fa fa-fw fa-home" style="font-size:18px;"></i> Home</a>
+      </li>
+      <li class="nav-item">
+                <a class="nav-item nav-link" href="{% url 'movies' %}"><i class="fa fa-film" style="font-size:18px;"></i> Movies</a>
+      </li>
+  <li class="nav-item">
+                <a class="nav-item nav-link" href="{% url 'series' %}"><i class="fa fa-play-circle" style="font-size:18px;"></i> Series</a>
+      </li>
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Genres</a>
+        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'gean-action' %}">action</a>
+          <a class="dropdown-item" href="{% url 'gean-sifi' %}">si-fi</a>
+          <a class="dropdown-item" href="{% url 'gean-thriller' %}">thriller</a>
+            <a class="dropdown-item" href="{% url 'gean-adventure' %}">adventure</a>
+          <a class="dropdown-item" href="{% url 'gean-classic' %}">classic</a>
+          <a class="dropdown-item" href="{% url 'gean-romance' %}">Romance</a>
+              <a class="dropdown-item" href="{% url 'gean-animation' %}">animation</a>
+          <a class="dropdown-item" href="{% url 'gean-drama' %}">drama</a>
+          <a class="dropdown-item" href="{% url 'gean-crime' %}">crime</a>
+              <a class="dropdown-item" href="{% url 'gean-mystery' %}">mystery</a>
+          <a class="dropdown-item" href="{% url 'gean-family' %}">family</a>
+          <a class="dropdown-item" href="{% url 'gean-documentary' %}">documentary</a>
+            <a class="dropdown-item" href="{% url 'gean-fantacy' %}">Fantasy</a>
+        </div>
+      </li>
+
+    </ul>
+    <!-- Links -->
+
+    <form class="form-inline" style="margin-right:10px;">
+      <div class="md-form my-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search" style="margin-top:10px;margin-bottom:-10px;">
+        <button  class="btn btn-outline-success " type="submit" style="font-size:14;width:75px;height:40px;background-color:#4BB543;margin-top:10px;margin-bottom:-10px;">Search</button>
+      </div>
+    </form>
+
+
+           <div class="navbar-nav">
+                {% if user.is_authenticated %}
+
+                 <a class="nav-item nav-link" href="{% url 'profile' %}"><i class="fas fa-user-alt" style="font-size:18px;"></i> {{ user.username }}</a>
+                 <a class="nav-item nav-link" href="{% url 'account_signup' %}"><i class="fas fa-sign-out-alt" style="font-size:18px;"></i> Logout</a>
+                {% else %}
+                 <a class="nav-item nav-link" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt" ></i> Login</a>
+                <a class="nav-item nav-link" href="{% url 'register' %}"><i class="fas fa-user-plus" style="font-size:14px;"></i> Register</a>
+                {% endif %}
+             </div>
+
+
+
+  </div>
+
+
+  <!-- Collapsible content -->
+
+</nav>
+    </header>
+
+    <div id="wrapper">
+        <header class="market-header header">
+            <div class="container-fluid">
+                <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+            <a class="navbar-brand mr-4" href="{% url 'blog-home' %}"><p style="font: normal 36px 'Cookie', cursive;margin:0px;">Axon <span style="color:#5383d3;">Blog</span></p></a>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item ">
+                             <a class="nav-item nav-link" href="{% url 'blog-home' %}"><i class="fa fa-fw fa-home" style="font-size:18px;"></i> Home</a>
+                          </li>
+                          <li class="nav-item">
+                                    <a class="nav-item nav-link" href="{% url 'movies' %}"><i class="fa fa-film" style="font-size:18px;"></i> Movies</a>
+                          </li>
+                      <li class="nav-item">
+                                    <a class="nav-item nav-link" href="{% url 'series' %}"><i class="fa fa-play-circle" style="font-size:18px;"></i> Series</a>
+                          </li>
+
+                                               <!-- Dropdown -->
+                      <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                          aria-haspopup="true" aria-expanded="false">Genres</a>
+                        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                          <a class="dropdown-item" href="{% url 'gean-action' %}">action</a>
+                          <a class="dropdown-item" href="{% url 'gean-sifi' %}">si-fi</a>
+                          <a class="dropdown-item" href="{% url 'gean-thriller' %}">thriller</a>
+                            <a class="dropdown-item" href="{% url 'gean-adventure' %}">adventure</a>
+                          <a class="dropdown-item" href="{% url 'gean-classic' %}">classic</a>
+                          <a class="dropdown-item" href="{% url 'gean-romance' %}">Romance</a>
+                              <a class="dropdown-item" href="{% url 'gean-animation' %}">animation</a>
+                          <a class="dropdown-item" href="{% url 'gean-drama' %}">drama</a>
+                          <a class="dropdown-item" href="{% url 'gean-crime' %}">crime</a>
+                              <a class="dropdown-item" href="{% url 'gean-mystery' %}">mystery</a>
+                          <a class="dropdown-item" href="{% url 'gean-family' %}">family</a>
+                          <a class="dropdown-item" href="{% url 'gean-documentary' %}">documentary</a>
+                            <a class="dropdown-item" href="{% url 'gean-fantacy' %}">Fantasy</a>
+                           <a class="dropdown-item" href="{% url 'gean-comedy' %}">Comedy</a>
+
+                        </div>
+
+                      </li>
+
+
+
+                        </ul>
+                          <form class="form-inline" method="get" action="/search">
+ <input list="oned" class="form-control mr-sm-2" type="text" placeholder="Search" name="search" id="search">
+                            <datalist id="oned">
+
+                            {% for result in move %}
+                                                              <option value="{{result.name}}"></option>
+
+                                {% endfor %}
+
+                                </datalist>
+                            <style>
+                                input::-webkit-calendar-picker-indicator {
+                                  display: none;
+                                }
+                            </style>
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+                        <div class="navbar-nav">
+                {% if user.is_authenticated %}
+
+                 <a class="nav-item nav-link" href="{% url 'profile' %}"><i class="fas fa-user-alt" style="font-size:18px;"></i> {{ user.username }}</a>
+                 <a class="nav-item nav-link" href="{% url 'account_signup' %}"><i class="fas fa-sign-out-alt" style="font-size:18px;"></i> Logout</a>
+                {% else %}
+                 <a class="nav-item nav-link" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt" ></i> Login</a>
+                <a class="nav-item nav-link" href="{% url 'register' %}"><i class="fas fa-user-plus" style="font-size:14px;"></i> Register</a>
+                {% endif %}
+             </div>
+                    </div>
+                </nav>
+            </div><!-- end container-fluid -->
+        </header><!-- end market-header -->
+
+        <section class="section lb m3rem">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-md-12 col-sm-12 col-xs-12">
+                        <div class="page-wrapper">
+                            <div class="blog-title-area">
+                                <ol class="breadcrumb hidden-xs-down">
+                                    <li class="breadcrumb-item"><a href="{% url 'blog-home' %}">Home</a></li>
+                                    <li class="breadcrumb-item"><a href="{% if movie.series %}{% url 'series' %}{% else %}{% url 'movies' %}{% endif %}">{% if movie.series %}Series{% else %}Movies{% endif %}</a></li>
+                                    <li class="breadcrumb-item ">{{ movie.name }}</li>
+                                </ol>
+
+                                <span class="color-yellow"><a href="{% if movie.series %}{% url 'series' %}{% else %}{% url 'movies' %}{% endif %}">{% if movie.series %}Series{% else %}Movies{% endif %}</a></span>
+
+                                <h3>{{ movie.name }}</h3>
+                                  {% ratings movie %}
+
+
+                                <div class="blog-meta big-meta">
+                                    <small><a href="marketing-single.html" title=""> {{ movie.date_released|date:"F d, Y " }}</a></small>
+                                    <small><a href="blog-author.html" title="">by {{ movie.producer }}</a></small>
+                                    <small><a href="#" title=""><i class="fa fa-eye"></i> 2344</a></small>
+                                </div><!-- end meta -->
+
+                                <div class="post-sharing">
+                                    <ul class="list-inline">
+                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
+                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div><!-- end post-sharing -->
+                            </div><!-- end title -->
+
+                            <video width="100%" height="100%" id="video" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.movies_stream }}" type="video/mp4">
+                               <source src="{{ movie.movies_stream }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+                            <div class="blog-content">
+                                <div class="pp">
+                                    {{ movie.description|safe }}
+                                </div><!-- end pp -->
+                            </div><!-- end content -->
+
+                            <div class="blog-title-area">
+                                <div class="tag-cloud-single">
+                                    <span>Tags</span>
+                                    {% if movie.action %}<small><a href="{% url 'gean-action' %}" title=""></a>action</small>{% endif %}
+                                    {% if movie.sifi %}<small><a href="{% url 'gean-sifi' %}" title=""></a>si-fi</small>{% endif %}
+                                    {% if movie.thriller %}<small><a href="{% url 'gean-thriller' %}" title=""></a>thriller</small>{% endif %}
+                                    {% if movie.adventure %}<small><a href="{% url 'gean-adventure' %}" title=""></a>adventure</small>{% endif %}
+                                    {% if movie.classic %}<small><a href="{% url 'gean-classic' %}" title=""></a>classic</small>{% endif %}
+                                    {% if movie.Romance %}<small><a href="{% url 'gean-romance' %}" title=""></a>Romance</small>{% endif %}
+                                    {% if movie.animation %}<small><a href="{% url 'gean-animation' %}" title=""></a>animation</small>{% endif %}
+                                    {% if movie.drama %}<small><a href="{% url 'gean-drama' %}" title=""></a>drama</small>{% endif %}
+                                    {% if movie.crime %}<small><a href="{% url 'gean-crime' %}" title=""></a>crime</small>{% endif %}
+                                    {% if movie.mystery %}<small><a href="{% url 'gean-mystery' %}" title=""></a>mystery</small>{% endif %}
+                                    {% if movie.family %}<small><a href="{% url 'gean-family' %}" title=""></a>family</small>{% endif %}
+                                    {% if movie.documentary %}<small><a href="{% url 'gean-documentary' %}" title=""></a>documentary</small>{% endif %}
+                                    {% if movie.fantasy %}<small><a href="{% url 'gean-fantacy' %}" title=""></a>fantasy</small>{% endif %}
+                                    {% if movie.comedy %}<small><a href="{% url 'gean-comedy' %}" title=""></a>comedy</small>{% endif %}
+
+
+
+                                </div><!-- end meta -->
+
+
+
+{% if movie.series %}
+                          {% if movie.ep1 %}
+                                                                          <h2>Session 1</h2>
+
+  <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Episode-1</button>
+
+  <div id="id01" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id01').style.display='none';document.getElementById('ep1').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+
+
+
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep1" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src=" {{ movie.ep1 }}" type="video/mp4">
+                               <source src=" {{ movie.ep1 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+
+                              {% if movie.ep2 %}
+  <button onclick="document.getElementById('id02').style.display='block'" class="w3-button w3-black">Episode-2</button>
+
+  <div id="id02" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id02').style.display='none';document.getElementById('ep2').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep2" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep2 }}" type="video/mp4">
+                             <source src="{{ movie.ep2 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep3 %}
+  <button onclick="document.getElementById('id03').style.display='block'" class="w3-button w3-black">Episode-3</button>
+
+  <div id="id03" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id03').style.display='none';document.getElementById('ep3').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+     <video width="100%" height="100%" id="ep3" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep3 }}" type="video/mp4">
+                               <source src="{{ movie.ep3 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep4 %}
+  <button onclick="document.getElementById('id04').style.display='block'" class="w3-button w3-black">Episode-4</button>
+
+  <div id="id04" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id04').style.display='none';document.getElementById('ep4').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+     <video width="100%" height="100%" id="ep4" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep4 }}" type="video/mp4">
+                               <source src="{{ movie.ep4 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+    </div>
+  </div>
+<br><br>
+
+{% endif %}
+
+                        {% if movie.ep5 %}
+  <button onclick="document.getElementById('id05').style.display='block'" class="w3-button w3-black">Episode-5</button>
+
+  <div id="id05" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id05').style.display='none';document.getElementById('ep5').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+     <video width="100%" height="100%" id="ep5" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep5 }}" type="video/mp4">
+                               <source src="{{ movie.ep5 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep6 %}
+  <button onclick="document.getElementById('id06').style.display='block'" class="w3-button w3-black">Episode-6</button>
+
+  <div id="id06" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id06').style.display='none';document.getElementById('ep6').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+     <video width="100%" height="100%" id="ep6" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep6 }}" type="video/mp4">
+                               <source src="{{ movie.ep6 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+  </div>
+  </div>
+{% endif %}
+
+                        {% if movie.ep7 %}
+  <button onclick="document.getElementById('id07').style.display='block'" class="w3-button w3-black">Episode-7</button>
+
+  <div id="id07" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id07').style.display='none';document.getElementById('ep7').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+     <video width="100%" height="100%" id="ep7" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep7 }}" type="video/mp4">
+                               <source src="{{ movie.ep7 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep8 %}
+  <button onclick="document.getElementById('id08').style.display='block'" class="w3-button w3-black">Episode-8</button>
+
+  <div id="id08" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id08').style.display='none';document.getElementById('ep8').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+     <video width="100%" height="100%" id="ep8" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep8 }}" type="video/mp4">
+                               <source src="{{ movie.ep8 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+    </div>
+  </div>
+<br><br>
+
+{% endif %}
+
+                        {% if movie.ep9 %}
+  <button onclick="document.getElementById('id09').style.display='block'" class="w3-button w3-black">Episode-9</button>
+
+  <div id="id09" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id09').style.display='none';document.getElementById('ep9').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep9" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep9 }}" type="video/mp4">
+                               <source src="{{ movie.ep9 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep10 %}
+  <button onclick="document.getElementById('id010').style.display='block'" class="w3-button w3-black">Episode-10</button>
+
+  <div id="id010" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id010').style.display='none';document.getElementById('ep10').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep10" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep10 }}" type="video/mp4">
+                               <source src="{{ movie.ep10 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep11 %}
+  <button onclick="document.getElementById('id011').style.display='block'" class="w3-button w3-black">Episode-11</button>
+
+  <div id="id011" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id011').style.display='none';document.getElementById('ep11').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep11" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep11 }}" type="video/mp4">
+                               <source src="{{ movie.ep11 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep12 %}
+  <button onclick="document.getElementById('id012').style.display='block'" class="w3-button w3-black">Episode-12</button>
+
+  <div id="id012" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id012').style.display='none';document.getElementById('ep12').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep12" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep12 }}" type="video/mp4">
+                               <source src="{{ movie.ep12 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+<br><br>
+
+{% endif %}
+
+                        {% if movie.ep13 %}
+  <button onclick="document.getElementById('id013').style.display='block'" class="w3-button w3-black">Episode-13</button>
+
+  <div id="id013" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id013').style.display='none';document.getElementById('ep13').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep13" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep13 }}" type="video/mp4">
+                               <source src="{{ movie.ep13 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep14 %}
+  <button onclick="document.getElementById('id014').style.display='block'" class="w3-button w3-black">Episode-14</button>
+
+  <div id="id014" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id014').style.display='none';document.getElementById('ep14').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep14" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep14 }}" type="video/mp4">
+                               <source src="{{ movie.ep14 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep15 %}
+  <button onclick="document.getElementById('id015').style.display='block'" class="w3-button w3-black">Episode-15</button>
+
+  <div id="id015" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id015').style.display='none';document.getElementById('ep15').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep15" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep15 }}" type="video/mp4">
+                               <source src="{{ movie.ep15 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep16 %}
+  <button onclick="document.getElementById('id016').style.display='block'" class="w3-button w3-black">Episode-16</button>
+
+  <div id="id016" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id016').style.display='none';document.getElementById('ep16').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep16" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep16 }}" type="video/mp4">
+                               <source src="{{ movie.ep16 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+<br><br>
+
+{% endif %}
+
+                        {% if movie.ep17 %}
+  <button onclick="document.getElementById('id017').style.display='block'" class="w3-button w3-black">Episode-17</button>
+
+  <div id="id017" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id017').style.display='none';document.getElementById('ep17').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep17" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep17 }}" type="video/mp4">
+                               <source src="{{ movie.ep17 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep18 %}
+  <button onclick="document.getElementById('id018').style.display='block'" class="w3-button w3-black">Episode-18</button>
+
+  <div id="id018" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id018').style.display='none';document.getElementById('ep18').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep18" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep18 }}" type="video/mp4">
+                               <source src="{{ movie.ep18 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep19 %}
+  <button onclick="document.getElementById('id019').style.display='block'" class="w3-button w3-black">Episode-19</button>
+
+  <div id="id019" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id019').style.display='none';document.getElementById('ep19').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep19" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep19 }}" type="video/mp4">
+                               <source src="{{ movie.ep19 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep20 %}
+  <button onclick="document.getElementById('id020').style.display='block'" class="w3-button w3-black">Episode-20</button>
+
+  <div id="id020" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id020').style.display='none';document.getElementById('ep20').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep20" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep20 }}" type="video/mp4">
+                               <source src="{{ movie.ep20 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+<br><br>
+
+{% endif %}
+
+                        {% if movie.ep21 %}
+  <button onclick="document.getElementById('id021').style.display='block'" class="w3-button w3-black">Episode-21</button>
+
+  <div id="id021" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id021').style.display='none';document.getElementById('ep21').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep21" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep21 }}" type="video/mp4">
+                               <source src="{{ movie.ep21 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep22 %}
+  <button onclick="document.getElementById('id022').style.display='block'" class="w3-button w3-black">Episode-22</button>
+
+  <div id="id022" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id022').style.display='none';document.getElementById('ep22').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep22" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep22 }}" type="video/mp4">
+                               <source src="{{ movie.ep22 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep23 %}
+  <button onclick="document.getElementById('id023').style.display='block'" class="w3-button w3-black">Episode-23</button>
+
+  <div id="id023" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id023').style.display='none';document.getElementById('ep23').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep23" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep23 }}" type="video/mp4">
+                               <source src="{{ movie.ep23 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep24 %}
+  <button onclick="document.getElementById('id024').style.display='block'" class="w3-button w3-black">Episode-24</button>
+
+  <div id="id024" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id024').style.display='none';document.getElementById('ep24').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep24" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep24 }}" type="video/mp4">
+                               <source src="{{ movie.ep24 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+<br><br>
+
+{% endif %}
+
+                        {% if movie.ep25 %}
+  <button onclick="document.getElementById('id025').style.display='block'" class="w3-button w3-black">Episode-25</button>
+
+  <div id="id025" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id025').style.display='none';document.getElementById('ep25').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep25" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep25 }}" type="video/mp4">
+                               <source src="{{ movie.ep25 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep26 %}
+  <button onclick="document.getElementById('id026').style.display='block'" class="w3-button w3-black">Episode-26</button>
+
+  <div id="id026" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id026').style.display='none';document.getElementById('ep26').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep26" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep26 }}" type="video/mp4">
+                               <source src="{{ movie.ep26 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep27 %}
+  <button onclick="document.getElementById('id027').style.display='block'" class="w3-button w3-black">Episode-27</button>
+
+  <div id="id027" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id027').style.display='none';document.getElementById('ep27').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep27" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep27 }}" type="video/mp4">
+                               <source src="{{ movie.ep27 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep28 %}
+  <button onclick="document.getElementById('id028').style.display='block'" class="w3-button w3-black">Episode-28</button>
+
+  <div id="id028" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id028').style.display='none';document.getElementById('ep28').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep28" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep28 }}" type="video/mp4">
+                               <source src="{{ movie.ep28 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+<br><br>
+
+{% endif %}
+
+                        {% if movie.ep29 %}
+  <button onclick="document.getElementById('id029').style.display='block'" class="w3-button w3-black">Episode-29</button>
+
+  <div id="id029" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id029').style.display='none';document.getElementById('ep29').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep29" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep29 }}" type="video/mp4">
+                               <source src="{{ movie.ep29 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+                        {% if movie.ep30 %}
+  <button onclick="document.getElementById('id030').style.display='block'" class="w3-button w3-black">Episode-30</button>
+
+  <div id="id030" class="w3-modal">
+<div class="w3-modal-content w3-animate-zoom">
+      <header class="w3-container">
+        <span onclick="document.getElementById('id030').style.display='none';document.getElementById('ep30').pause();"
+        class="w3-button w3-display-topright" >&times;
+        </span>
+        <h2>{{ movie.name }}</h2>
+      </header>
+    <video width="100%" height="100%" id="ep30" poster="{% if movie.image %} {{ movie.image.url }} {% else %} {{ movie.image_link }} {% endif %}" controls>
+                               <source src="{{ movie.ep30 }}" type="video/mp4">
+                               <source src="{{ movie.ep30 }}" type="video/ogg">
+                               Your browser does not support the video tag.
+                            </video>
+
+    </div>
+  </div>
+
+{% endif %}
+
+
+
+                                
+
+
+{% endif %}
+
+
+
+
+
+
+
+
+
+                                <div class="post-sharing">
+                                    <ul class="list-inline">
+                                        <li><a href="#" class="fb-button btn btn-primary"><i class="fa fa-facebook"></i> <span class="down-mobile">Share on Facebook</span></a></li>
+                                        <li><a href="#" class="tw-button btn btn-primary"><i class="fa fa-twitter"></i> <span class="down-mobile">Tweet on Twitter</span></a></li>
+                                        <li><a href="#" class="gp-button btn btn-primary"><i class="fa fa-google-plus"></i></a></li>
+                                    </ul>
+                                </div><!-- end post-sharing -->
+                            </div><!-- end title -->
+
+                            <div class="row">
+
+                                <div class="col-lg-12">
+
+                                    <div class="banner-spot clearfix">
+                                        <div class="banner-img">
+                                            {% for s in advt %}
+                                        {% if forloop.counter == 2 %}
+                                        <img src="{{ s.advt.url }}" alt="" class="img-fluid">
+                                        {% endif %}
+                                        {% endfor %}
+                                        </div><!-- end banner-img -->
+                                    </div><!-- end banner -->
+                                </div><!-- end col -->
+                            </div><!-- end row -->
+
+                            <hr class="invi">
+
+                            <div class="custombox authorbox clearfix">
+                                <h4 class="small-title">About author</h4>
+                                <div class="row">
+                                    <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                        <img src="upload/author.jpg" alt="" class="img-fluid rounded-circle">
+                                    </div><!-- end col -->
+
+                                    <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                                        <h4><a href="#">Jessica</a></h4>
+                                        <p>Quisque sed tristique felis. Lorem <a href="#">visit my website</a> amet, consectetur adipiscing elit. Phasellus quis mi auctor, tincidunt nisl eget, finibus odio. Duis tempus elit quis risus congue feugiat. Thanks for stop Markedia!</p>
+
+                                        <div class="topsocial">
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Pinterest"><i class="fa fa-pinterest"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Instagram"><i class="fa fa-instagram"></i></a>
+                                            <a href="#" data-toggle="tooltip" data-placement="bottom" title="Website"><i class="fa fa-link"></i></a>
+                                        </div><!-- end social -->
+
+                                    </div><!-- end col -->
+                                </div><!-- end row -->
+                            </div><!-- end author-box -->
+
+                            <hr class="invi">
+
+
+                            <hr class="invi">
+
+                            <div class="custombox clearfix">
+                                <h4 class="small-title">{{ page_obj.paginator.count }} Comments</h4>
+                                <div class="row">
+
+
+                                            {% for post in posts %}
+                                     <div class="col-lg-12">
+                                        <div class="comments-list">
+                                            <div class="media">
+                                                <a class="media-left" href="{% url 'user-post' post.author.username %}">
+                                                    <img height="70px" width="70px" src="{{ post.author.profile.image.url }}" alt="" class="rounded-circle">
+                                                </a>
+                                                <div class="media-body">
+                                                    <a class="media-left" href="{% url 'user-post' post.author.username %}">
+                                                    <h4 class="media-heading user_name">{{ post.author }}<small>{{ post.date_posted|date:"F d, Y " }}</small></h4>
+                                                    </a>
+                                                      <a href="{% url 'post-detail' post.id %}">
+                                                    <h4>{{ post.title }}</h4>
+                                                    <p style="width:100%;  overflow: hidden;display: -webkit-box;  -webkit-line-clamp: 3;  -webkit-box-orient: vertical;">{{ post.content|safe }}</p>
+                                                      </a>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        </div>
+                                        {% endfor %}
+
+                                    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+              <a class ="btn btn-outline-info mb-4" href="?page=1" style="margin-left:10px;">First</a>
+              <a class ="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}" style="margin:2px;">Previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+              <a class ="btn btn-info mb-4" href="?page={{ num }}" style="margin-left:10px;">{{ num }}</a>
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <a class ="btn btn-outline-info mb-4" href="?page={{ num }}" style="margin:1px;">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+              <a class ="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}" style="margin:1px;">Next</a>
+              <a class ="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}" style="margin:1px;">Last</a>
+        {% endif %}
+
+
+    {% endif %}
+
+
+                                    <!-- end col -->
+                                </div><!-- end row -->
+                            </div><!-- end custom-box -->
+
+                            <hr class="invi">
+
+                            <div class="custombox clearfix">
+
+                                <div class="row">
+                                <a href="{% url 'post-create' movie.name movie.id  %}">
+                                    <button type="submit" class="btn btn-primary">Submit Comment</button>
+                                    </a>
+                                </div>
+                            </div>
+                        </div><!-- end page-wrapper -->
+                    </div><!-- end col -->
+
+                    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
+                        <div class="sidebar">
+                            <div class="widget-no-style">
+                                <div class="newsletter-widget text-center align-self-center">
+                                    <h3>Subscribe Today!</h3>
+                                    <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
+                                    <form class="form-inline" method="post">
+                                        <input type="text" name="email" placeholder="Add your email here.." required class="form-control" />
+                                        <input type="submit" value="Subscribe" class="btn btn-default btn-block" />
+                                    </form>
+                                </div><!-- end newsletter -->
+                            </div>
+
+                            <div class="widget">
+                                <h2 class="widget-title">You May Like</h2>
+                                <div class="blog-list-widget">
+                                    <div class="list-group">
+
+
+                                            {% for s in send %}
+                                                        {% if forloop.counter <= 8 %}
+                                        <a href="{% url 'movies-detail' s.name s.id %}" class="list-group-item list-group-item-action flex-column align-items-start">
+
+                                            <div class="w-100 justify-content-between">
+                                                <img src="{% if s.image %}{{ s.image.url }}{% else %}{{ s.image_link }}{% endif %}" alt="" class="img-fluid float-left">
+                                                <h5 class="mb-1">{{ s.name }}</h5>
+                                                <small>{{ s.date_released }}</small>
+                                            </div>
+                                            </a>
+                                                    {% endif %}
+                                        {% endfor %}
+
+
+                                    </div>
+                                </div><!-- end blog-list -->
+                            </div><!-- end widget -->
+
+                            <div id="" class="widget">
+                                <h2 class="widget-title">Advertising</h2>
+                                <div class="banner-spot clearfix">
+                                    <div class="banner-img">
+                                        {% for s in advt %}
+                                        {% if forloop.counter == 1 %}
+                                        <img src="{{ s.advt.url }}">
+                                        {% endif %}
+                                        {% endfor %}
+                                    </div><!-- end banner-img -->
+                                </div><!-- end banner -->
+                            </div><!-- end widget -->
+
+
+                            <div class="widget">
+                                <h2 class="widget-title">Popular Categories</h2>
+                                <div class="link-widget">
+                                    <ul>
+                                        <li><a href="{% url 'gean-action' %}" title="">action</a></li>
+                                        <li><a href="{% url 'gean-sifi' %}" title="">si-fi</a></li>
+                                        <li><a href="{% url 'gean-thriller' %}" title="">thriller</a></li>
+                                        <li><a href="{% url 'gean-adventure' %}" title="">adventure</a></li>
+                                        <li><a href="{% url 'gean-classic' %}" title="">classic</a></li>
+                                        <li><a href="{% url 'gean-romance' %}" title="">Romance</a></li>
+                                        <li><a href="{% url 'gean-animation' %}" title="">animation</a></li>
+                                        <li><a href="{% url 'gean-drama' %}" title="">drama</a></li>
+                                        <li><a href="{% url 'gean-crime' %}" title="">crime</a></li>
+                                        <li><a href="{% url 'gean-mystery' %}" title="">mystery</a></li>
+                                        <li><a href="{% url 'gean-family' %}" title="">family</a></li>
+                                        <li><a href="{% url 'gean-documentary' %}" title="">documentary</a></li>
+                                        <li><a href="{% url 'gean-fantacy' %}" title="">fantasy</a></li>
+                                        <li><a href="{% url 'gean-comedy' %}" title="">comedy</a></li>
+                                    </ul>
+                                </div><!-- end link-widget -->
+                            </div><!-- end widget -->
+                        </div><!-- end sidebar -->
+                    </div><!-- end col -->
+                </div><!-- end row -->
+            </div><!-- end container -->
+        </section>
+
+
+</div>
+ <!-- Core JavaScript
+    ================================================== -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/tether.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/animate.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+<script>
+
+
+</script>
+
+
+</body>
+
+
+
+
+
+</html>
+
+<style>
+
+section {
+
+  background-image: url("/media/body-bg.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  -moz-background-size: cover;
+  -webkit-background-size: cover;
+  -o-background-size: cover;
+  -ms-background-size: cover;
+  background-position: center center; }
+
+</style>

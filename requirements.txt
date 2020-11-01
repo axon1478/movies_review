@@ -1,0 +1,6 @@
+django
+pillow
+django-allauth
+django-crispy-forms
+django-star-ratings
+django-tiny-mce4

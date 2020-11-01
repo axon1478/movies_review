@@ -1,0 +1,218 @@
+
+{% load static %}
+{% load ratings %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Basic -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Site Metas -->
+        {% if title %}
+        <title>Django Blog - {{ title }}</title>
+    {% else %}
+        <title>Django Blog</title>
+    {% endif %}
+
+
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Site Icons -->
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon" />
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Design fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Slab:400,700" rel="stylesheet">
+
+
+
+
+
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/main.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/animate.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/bootstrap.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/mark.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/font-awesome.min.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/responsive.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'blog/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'star-ratings/css/star-ratings.css' %}">
+    <script type="text/javascript" src="{% static 'star-ratings/js/dist/star-ratings.min.js' %}"></script>
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+
+    <script src='https://kit.fontawesome.com/a076d05399.js'></script>
+
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+    <link href="http://fonts.googleapis.com/css?family=Cookie" rel="stylesheet" type="text/css">
+
+
+
+    <!-- Bootstrap CSS -->
+
+
+    <!-- Bootstrap CSS -->
+
+
+
+
+
+</head>
+
+
+
+<body>
+
+
+
+
+    <div id="wrapper">
+        <header class="market-header header">
+            <div class="container-fluid">
+                <nav class="navbar navbar-toggleable-md navbar-inverse fixed-top bg-inverse">
+                    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+            <a class="navbar-brand mr-4" href="{% url 'blog-home' %}"><p style="font: normal 36px 'Cookie', cursive;margin:0px;">Axon <span style="color:#5383d3;">Blog</span></p></a>
+                    <div class="collapse navbar-collapse" id="navbarCollapse">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                             <a class="nav-item nav-link" href="{% url 'blog-home' %}"><i class="fa fa-fw fa-home" style="font-size:18px;"></i> Home</a>
+                          </li>
+                          <li class="nav-item">
+                                    <a class="nav-item nav-link" href="{% url 'movies' %}"><i class="fa fa-film" style="font-size:18px;"></i> Movies</a>
+                          </li>
+                      <li class="nav-item">
+                                    <a class="nav-item nav-link" href="{% url 'series' %}"><i class="fa fa-play-circle" style="font-size:18px;"></i> Series</a>
+                          </li>
+
+
+      <!-- Dropdown -->
+      <li class="nav-item dropdown">
+
+        <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+          aria-haspopup="true" aria-expanded="false">Genres</a>
+
+        <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="{% url 'gean-series-action' %}">action</a>
+          <a class="dropdown-item" href="{% url 'gean-series-sifi' %}">si-fi</a>
+          <a class="dropdown-item" href="{% url 'gean-series-thriller' %}">thriller</a>
+            <a class="dropdown-item" href="{% url 'gean-series-adventure' %}">adventure</a>
+          <a class="dropdown-item" href="{% url 'gean-series-classic' %}">classic</a>
+          <a class="dropdown-item" href="{% url 'gean-series-romance' %}">Romance</a>
+              <a class="dropdown-item" href="{% url 'gean-series-animation' %}">animation</a>
+          <a class="dropdown-item" href="{% url 'gean-series-drama' %}">drama</a>
+          <a class="dropdown-item" href="{% url 'gean-series-crime' %}">crime</a>
+              <a class="dropdown-item" href="{% url 'gean-series-mystery' %}">mystery</a>
+          <a class="dropdown-item" href="{% url 'gean-series-family' %}">family</a>
+          <a class="dropdown-item" href="{% url 'gean-series-documentary' %}">documentary</a>
+            <a class="dropdown-item" href="{% url 'gean-series-fantacy' %}">Fantasy</a>
+        </div>
+      </li>
+
+    </ul>
+    <!-- Links -->
+
+
+                        <form class="form-inline" method="get" action="/search">
+                            <input class="form-control mr-sm-2" type="text" placeholder="Search" name="search" id="search">
+                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                        </form>
+
+                          <div class="navbar-nav">
+                {% if user.is_authenticated %}
+
+                 <a class="nav-item nav-link" href="{% url 'profile' %}"><i class="fas fa-user-alt" style="font-size:18px;"></i> {{ user.username }}</a>
+                 <a class="nav-item nav-link" href="{% url 'account_logout' %}"><i class="fas fa-sign-out-alt" style="font-size:18px;"></i> Logout</a>
+                {% else %}
+                 <a class="nav-item nav-link" href="{% url 'account_login' %}"><i class="fas fa-sign-in-alt" ></i> Login</a>
+                <a class="nav-item nav-link" href="{% url 'register' %}"><i class="fas fa-user-plus" style="font-size:14px;"></i> Register</a>
+                {% endif %}
+             </div>
+
+                    </div>
+                </nav>
+            </div><!-- end container-fluid -->
+
+
+
+                    {% block header %}{% endblock %}
+        </header><!-- end market-header -->
+
+
+
+<br>
+    <main role="main" class="container" style="">
+
+      <div class="row">
+        <div class="col-md-8">
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+          {% block content %}{% endblock %}
+
+        </div>
+      </div>
+    </main>
+
+
+
+</div>
+
+
+    {% if is_paginated %}
+        {% if page_obj.has_previous %}
+              <a class ="btn btn-outline-info mb-4" href="?page=1" style="margin-left:200px;">First</a>
+              <a class ="btn btn-outline-info mb-4" href="?page={{ page_obj.previous_page_number }}" style="margin:2px;">Previous</a>
+        {% endif %}
+
+        {% for num in page_obj.paginator.page_range %}
+            {% if page_obj.number == num %}
+
+                {% if num == 1 %}
+              <a class ="btn btn-info mb-4" href="?page={{ num }}" style="margin-left:200px;">{{ num }}</a>
+                {% else %}
+                  <a class ="btn btn-info mb-4" href="?page={{ num }}" style="margin-left:;">{{ num }}</a>
+                {% endif %}
+                {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+              <a class ="btn btn-outline-info mb-4" href="?page={{ num }}" style="margin:1px;">{{ num }}</a>
+            {% endif %}
+        {% endfor %}
+
+        {% if page_obj.has_next %}
+              <a class ="btn btn-outline-info mb-4" href="?page={{ page_obj.next_page_number }}" style="margin:1px;">Next</a>
+              <a class ="btn btn-outline-info mb-4" href="?page={{ page_obj.paginator.num_pages }}" style="margin:1px;">Last</a>
+        {% endif %}
+
+
+    {% endif %}
+
+
+
+
+
+
+ <!-- Core JavaScript
+    ================================================== -->
+    <script src="{% static 'js/jquery.min.js' %}"></script>
+    <script src="{% static 'js/tether.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/animate.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+</body>
+</html>
+
