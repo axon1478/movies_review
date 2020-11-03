@@ -38,11 +38,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Site Metas -->
-        {% if title %}
-        <title>Django Blog - {{ title }}</title>
-    {% else %}
-        <title>Django Blog</title>
-    {% endif %}
+        <title>Axon Sites</title>
 
 
     <meta name="keywords" content="">
@@ -360,8 +356,8 @@
                         <div class="hover_watch"><div class="watch"></div></div>
                 </div>
                 <div class="name" style=" color:white ">
-                       {{ movie.name }}
-
+                       {{ movie.name }}<br>
+Rating : {{ movie.imdb }}
                 </div>
                 <div class="meta">
                     <span class="date">{{ movie.date_released|date:"F d, Y " }}</span>

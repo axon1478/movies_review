@@ -1,5 +1,7 @@
+
 {% load static %}
-{% load ratings %}
+{% load i18n %}
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,11 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Site Metas -->
-        {% if title %}
-        <title>Django Blog - {{ title }}</title>
-    {% else %}
-        <title>Django Blog</title>
-    {% endif %}
+        <title>Axon Sites</title>
 
 
     <meta name="keywords" content="">
@@ -230,9 +228,7 @@
                                 <span class="color-yellow"><a href="{% if movie.series %}{% url 'series' %}{% else %}{% url 'movies' %}{% endif %}">{% if movie.series %}Series{% else %}Movies{% endif %}</a></span>
 
                                 <h3>{{ movie.name }}</h3>
-                                  {% ratings movie %}
-
-
+                                <h4>Rating : {{ movie.imdb }}</h4>
                                 <div class="blog-meta big-meta">
                                     <small><a href="marketing-single.html" title=""> {{ movie.date_released|date:"F d, Y " }}</a></small>
                                     <small><a href="blog-author.html" title="">by {{ movie.producer }}</a></small>
@@ -291,6 +287,9 @@
   <button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black">Episode-1</button>
 
   <div id="id01" class="w3-modal">
+      <br>
+      <br>
+
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id01').style.display='none';document.getElementById('ep1').pause();"
@@ -317,6 +316,8 @@
   <button onclick="document.getElementById('id02').style.display='block'" class="w3-button w3-black">Episode-2</button>
 
   <div id="id02" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id02').style.display='none';document.getElementById('ep2').pause();"
@@ -338,6 +339,8 @@
   <button onclick="document.getElementById('id03').style.display='block'" class="w3-button w3-black">Episode-3</button>
 
   <div id="id03" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id03').style.display='none';document.getElementById('ep3').pause();"
@@ -359,6 +362,8 @@
   <button onclick="document.getElementById('id04').style.display='block'" class="w3-button w3-black">Episode-4</button>
 
   <div id="id04" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id04').style.display='none';document.getElementById('ep4').pause();"
@@ -381,6 +386,8 @@
   <button onclick="document.getElementById('id05').style.display='block'" class="w3-button w3-black">Episode-5</button>
 
   <div id="id05" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id05').style.display='none';document.getElementById('ep5').pause();"
@@ -402,6 +409,8 @@
   <button onclick="document.getElementById('id06').style.display='block'" class="w3-button w3-black">Episode-6</button>
 
   <div id="id06" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id06').style.display='none';document.getElementById('ep6').pause();"
@@ -422,6 +431,8 @@
   <button onclick="document.getElementById('id07').style.display='block'" class="w3-button w3-black">Episode-7</button>
 
   <div id="id07" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id07').style.display='none';document.getElementById('ep7').pause();"
@@ -443,6 +454,8 @@
   <button onclick="document.getElementById('id08').style.display='block'" class="w3-button w3-black">Episode-8</button>
 
   <div id="id08" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id08').style.display='none';document.getElementById('ep8').pause();"
@@ -465,6 +478,8 @@
   <button onclick="document.getElementById('id09').style.display='block'" class="w3-button w3-black">Episode-9</button>
 
   <div id="id09" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id09').style.display='none';document.getElementById('ep9').pause();"
@@ -486,6 +501,8 @@
   <button onclick="document.getElementById('id010').style.display='block'" class="w3-button w3-black">Episode-10</button>
 
   <div id="id010" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id010').style.display='none';document.getElementById('ep10').pause();"
@@ -508,6 +525,8 @@
   <button onclick="document.getElementById('id011').style.display='block'" class="w3-button w3-black">Episode-11</button>
 
   <div id="id011" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id011').style.display='none';document.getElementById('ep11').pause();"
@@ -530,6 +549,8 @@
   <button onclick="document.getElementById('id012').style.display='block'" class="w3-button w3-black">Episode-12</button>
 
   <div id="id012" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id012').style.display='none';document.getElementById('ep12').pause();"
@@ -553,6 +574,8 @@
   <button onclick="document.getElementById('id013').style.display='block'" class="w3-button w3-black">Episode-13</button>
 
   <div id="id013" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id013').style.display='none';document.getElementById('ep13').pause();"
@@ -575,6 +598,8 @@
   <button onclick="document.getElementById('id014').style.display='block'" class="w3-button w3-black">Episode-14</button>
 
   <div id="id014" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id014').style.display='none';document.getElementById('ep14').pause();"
@@ -597,6 +622,8 @@
   <button onclick="document.getElementById('id015').style.display='block'" class="w3-button w3-black">Episode-15</button>
 
   <div id="id015" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id015').style.display='none';document.getElementById('ep15').pause();"
@@ -619,6 +646,8 @@
   <button onclick="document.getElementById('id016').style.display='block'" class="w3-button w3-black">Episode-16</button>
 
   <div id="id016" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id016').style.display='none';document.getElementById('ep16').pause();"
@@ -642,6 +671,8 @@
   <button onclick="document.getElementById('id017').style.display='block'" class="w3-button w3-black">Episode-17</button>
 
   <div id="id017" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id017').style.display='none';document.getElementById('ep17').pause();"
@@ -664,6 +695,8 @@
   <button onclick="document.getElementById('id018').style.display='block'" class="w3-button w3-black">Episode-18</button>
 
   <div id="id018" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id018').style.display='none';document.getElementById('ep18').pause();"
@@ -686,6 +719,8 @@
   <button onclick="document.getElementById('id019').style.display='block'" class="w3-button w3-black">Episode-19</button>
 
   <div id="id019" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id019').style.display='none';document.getElementById('ep19').pause();"
@@ -708,6 +743,8 @@
   <button onclick="document.getElementById('id020').style.display='block'" class="w3-button w3-black">Episode-20</button>
 
   <div id="id020" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id020').style.display='none';document.getElementById('ep20').pause();"
@@ -731,6 +768,8 @@
   <button onclick="document.getElementById('id021').style.display='block'" class="w3-button w3-black">Episode-21</button>
 
   <div id="id021" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id021').style.display='none';document.getElementById('ep21').pause();"
@@ -753,6 +792,8 @@
   <button onclick="document.getElementById('id022').style.display='block'" class="w3-button w3-black">Episode-22</button>
 
   <div id="id022" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id022').style.display='none';document.getElementById('ep22').pause();"
@@ -775,6 +816,8 @@
   <button onclick="document.getElementById('id023').style.display='block'" class="w3-button w3-black">Episode-23</button>
 
   <div id="id023" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id023').style.display='none';document.getElementById('ep23').pause();"
@@ -797,6 +840,8 @@
   <button onclick="document.getElementById('id024').style.display='block'" class="w3-button w3-black">Episode-24</button>
 
   <div id="id024" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id024').style.display='none';document.getElementById('ep24').pause();"
@@ -820,6 +865,8 @@
   <button onclick="document.getElementById('id025').style.display='block'" class="w3-button w3-black">Episode-25</button>
 
   <div id="id025" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id025').style.display='none';document.getElementById('ep25').pause();"
@@ -842,6 +889,8 @@
   <button onclick="document.getElementById('id026').style.display='block'" class="w3-button w3-black">Episode-26</button>
 
   <div id="id026" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id026').style.display='none';document.getElementById('ep26').pause();"
@@ -864,6 +913,8 @@
   <button onclick="document.getElementById('id027').style.display='block'" class="w3-button w3-black">Episode-27</button>
 
   <div id="id027" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id027').style.display='none';document.getElementById('ep27').pause();"
@@ -886,6 +937,8 @@
   <button onclick="document.getElementById('id028').style.display='block'" class="w3-button w3-black">Episode-28</button>
 
   <div id="id028" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id028').style.display='none';document.getElementById('ep28').pause();"
@@ -909,6 +962,8 @@
   <button onclick="document.getElementById('id029').style.display='block'" class="w3-button w3-black">Episode-29</button>
 
   <div id="id029" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id029').style.display='none';document.getElementById('ep29').pause();"
@@ -931,6 +986,8 @@
   <button onclick="document.getElementById('id030').style.display='block'" class="w3-button w3-black">Episode-30</button>
 
   <div id="id030" class="w3-modal">
+       <br>
+      <br>
 <div class="w3-modal-content w3-animate-zoom">
       <header class="w3-container">
         <span onclick="document.getElementById('id030').style.display='none';document.getElementById('ep30').pause();"
@@ -989,7 +1046,7 @@
                                 </div><!-- end col -->
                             </div><!-- end row -->
 
-                            <hr class="invi">
+                            <br>
 
                             <div class="custombox authorbox clearfix">
                                 <h4 class="small-title">About author</h4>
@@ -999,9 +1056,8 @@
                                     </div><!-- end col -->
 
                                     <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
-                                        <h4><a href="#">Jessica</a></h4>
-                                        <p>Quisque sed tristique felis. Lorem <a href="#">visit my website</a> amet, consectetur adipiscing elit. Phasellus quis mi auctor, tincidunt nisl eget, finibus odio. Duis tempus elit quis risus congue feugiat. Thanks for stop Markedia!</p>
-
+                                        <h4><a href="#">Axon Allen</a></h4>
+                                        <p>I make Websites lot of them are cool <a href="#">axonsites.com</a>.In this site i use Bootstrap,CSS 3, JavaScript,HTML 5 and my favorite Django. Thanks for stopping AxonSites!</p>
                                         <div class="topsocial">
                                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Facebook"><i class="fa fa-facebook"></i></a>
                                             <a href="#" data-toggle="tooltip" data-placement="bottom" title="Youtube"><i class="fa fa-youtube"></i></a>
@@ -1015,10 +1071,9 @@
                                 </div><!-- end row -->
                             </div><!-- end author-box -->
 
-                            <hr class="invi">
+                            <br>
 
 
-                            <hr class="invi">
 
                             <div class="custombox clearfix">
                                 <h4 class="small-title">{{ page_obj.paginator.count }} Comments</h4>
@@ -1090,16 +1145,7 @@
 
                     <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
                         <div class="sidebar">
-                            <div class="widget-no-style">
-                                <div class="newsletter-widget text-center align-self-center">
-                                    <h3>Subscribe Today!</h3>
-                                    <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
-                                    <form class="form-inline" method="post">
-                                        <input type="text" name="email" placeholder="Add your email here.." required class="form-control" />
-                                        <input type="submit" value="Subscribe" class="btn btn-default btn-block" />
-                                    </form>
-                                </div><!-- end newsletter -->
-                            </div>
+
 
                             <div class="widget">
                                 <h2 class="widget-title">You May Like</h2>
@@ -1114,6 +1160,7 @@
                                             <div class="w-100 justify-content-between">
                                                 <img src="{% if s.image %}{{ s.image.url }}{% else %}{{ s.image_link }}{% endif %}" alt="" class="img-fluid float-left">
                                                 <h5 class="mb-1">{{ s.name }}</h5>
+                                                <h6 class="mb-1">Rating : {{ s.imdb }}</h6>
                                                 <small>{{ s.date_released }}</small>
                                             </div>
                                             </a>
@@ -1124,6 +1171,18 @@
                                     </div>
                                 </div><!-- end blog-list -->
                             </div><!-- end widget -->
+
+                            <div class="widget-no-style">
+                                <div class="newsletter-widget text-center align-self-center">
+                                    <h3>Subscribe Today!</h3>
+                                    <p>Subscribe to our weekly Newsletter and receive updates via email.</p>
+                                    <form class="form-inline" method="post">
+                                                {% csrf_token %}
+                                        <input type="text" name="email" placeholder="Add your email here.." required class="form-control" />
+                                        <input type="submit" value="Subscribe" class="btn btn-default btn-block" />
+                                    </form>
+                                </div><!-- end newsletter -->
+                            </div>
 
                             <div id="" class="widget">
                                 <h2 class="widget-title">Advertising</h2>

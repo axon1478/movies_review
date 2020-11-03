@@ -14,11 +14,7 @@
     <!-- Mobile Metas -->
 
     <!-- Site Metas -->
-        {% if title %}
-        <title>Django Blog - {{ title }}</title>
-    {% else %}
-        <title>Django Blog</title>
-    {% endif %}
+        <title>Axon Sites</title>
 
 
 
@@ -303,19 +299,14 @@
                         <div class="hover_watch"><div class="watch"></div></div>
                 </div>
                 <div class="name" style="color:white">
-                       {{ movie.name }}
+                       {{ movie.name }}<br>
+                    Rating : {{ movie.imdb }}
                 </div>
                 <div class="meta">
-                    <span class="date" style="color:#fffff5">{{ movie.date_released|date:"F d, Y " }}</span>
+                    <span class="date" style="">{{ movie.date_released|date:"F d, Y " }}</span>
 			     </div>
             </a>
-
-
-
         </li>
-
-
-
                                   {% endfor %}
 
 
